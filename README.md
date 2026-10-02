@@ -76,8 +76,7 @@ flowchart TD
 | Scheduling | cron |
 
 ## Demo
-
-*(Screenshots of the Slack digest and dashboard go here)*
+![Dashboard Demo](https://github.com/InYoungee/jira-phrase-loc-automation-ai-mt-routing/blob/main/assets/end-to-end%20process.gif)
 
 ## Setup
 
