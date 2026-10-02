@@ -77,6 +77,8 @@ flowchart TD
 
 ## Demo
 ![Dashboard Demo](https://github.com/InYoungee/localization-news-intelligence-agent/blob/main/images/news_agent.gif)
+![Dashboard Demo](https://github.com/InYoungee/localization-news-intelligence-agent/blob/main/images/news_agent_slack.gif)
+
 
 ## Setup
 
