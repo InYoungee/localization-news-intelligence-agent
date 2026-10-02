@@ -76,7 +76,10 @@ flowchart TD
 | Scheduling | cron |
 
 ## Demo
+# Streamlit Dashboard
 ![Dashboard Demo](https://github.com/InYoungee/localization-news-intelligence-agent/blob/main/images/news_agent.gif)
+
+# Slack notification
 ![Dashboard Demo](https://github.com/InYoungee/localization-news-intelligence-agent/blob/main/images/news_agent_slack.gif)
 
 
