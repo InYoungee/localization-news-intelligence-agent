@@ -8,7 +8,7 @@ from news_db import get_articles_for_digest, mark_as_digested
 load_dotenv()
 SLACK_WEBHOOK_URL = os.getenv("NEWS_SLACK_WEBHOOK_URL")
 
-MIN_SCORE_FOR_DIGEST = 3  # adjustable — this is your threshold knob
+MIN_SCORE_FOR_DIGEST = 3  # adjustable
 
 
 def group_by_category(articles):

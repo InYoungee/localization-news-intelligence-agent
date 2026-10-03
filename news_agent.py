@@ -31,7 +31,7 @@ def call_claude_with_retry(prompt, max_retries=3):
 		try:
 			response = client.messages.create(
 				model="claude-sonnet-5",
-				max_tokens=700,  # CHANGED from 400 — was truncating longer summaries mid-JSON
+				max_tokens=700,
 				thinking={"type": "disabled"},
 				messages=[{"role": "user", "content": prompt}],
 			)
@@ -98,7 +98,7 @@ Respond with ONLY a JSON object, no other text, in this exact shape:
 		model="claude-sonnet-5",
 		max_tokens=700,
 		thinking={"type": "disabled"},
-		tools=[{"type": "web_search_20250305", "name": "web_search"}],  # NEW — real agentic capability
+		tools=[{"type": "web_search_20250305", "name": "web_search"}],
 		messages=[{"role": "user", "content": prompt}],
 	)
 
