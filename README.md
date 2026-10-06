@@ -106,55 +106,7 @@ flowchart TD
    On macOS, `cron` typically needs Full Disk Access granted in System Settings →
    Privacy & Security before scheduled jobs will actually run.
 
-
-
-   Schedule it weekly via launchd (macOS's native scheduler — more reliable than cron on recent macOS versions, see Engineering Notes below for why): Create ~/Library/LaunchAgents/com.yourname.newsagent.weekly.plist:
-xml
-   <?xml version="1.0" encoding="UTF-8"?>
-   <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-   <plist version="1.0">
-   <dict>
-       <key>Label</key>
-       <string>com.yourname.newsagent.weekly</string>
-       <key>ProgramArguments</key>
-       <array>
-           <string>/path/to/project/.venv/bin/python</string>
-           <string>/path/to/project/news_weekly_run.py</string>
-       </array>
-       <key>WorkingDirectory</key>
-       <string>/path/to/project</string>
-       <key>StartCalendarInterval</key>
-       <dict>
-           <key>Weekday</key><integer>1</integer>
-           <key>Hour</key><integer>9</integer>
-           <key>Minute</key><integer>0</integer>
-       </dict>
-       <key>StandardOutPath</key>
-       <string>/path/to/project/launchd_output.log</string>
-       <key>StandardErrorPath</key>
-       <string>/path/to/project/launchd_error.log</string>
-       <key>RunAtLoad</key><false/>
-   </dict>
-   </plist>
-
-Then load it and confirm it registered:
-
-bash
-   launchctl load ~/Library/LaunchAgents/com.yourname.newsagent.weekly.plist
-   launchctl list | grep newsagent
-
-Test immediately rather than waiting a week: launchctl start com.yourname.newsagent.weekly, then check launchd_output.log.
-
-Separately, since no scheduler can run a job while the machine is asleep, schedule the Mac itself to wake beforehand:
-
-bash
-   sudo pmset repeat wakeorpoweron M 08:55:00
-
-On macOS, both cron and launchd typically need Full Disk Access granted in System Settings → Privacy & Security before scheduled jobs will actually run — and this permission can silently reset after a macOS update, worth re-checking if a scheduled run goes missing. 5. View the dashboard:
-
-bash
-   streamlit run streamlit_news_dashboard.py
-6. View the dashboard:
+5. View the dashboard:
    ```bash
    streamlit run streamlit_news_dashboard.py
    ```
