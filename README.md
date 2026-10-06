@@ -77,7 +77,7 @@ flowchart TD
 
 ## Demo
 ### 1. Streamlit Dashboard
-![Dashboard Demo](https://github.com/InYoungee/localization-news-intelligence-agent/blob/main/images/news_agent.gif)
+![Dashboard Demo](https://github.com/InYoungee/localization-news-intelligence-agent/blob/main/images/news_agent_dashboard.gif)
 
 ### 2. Slack notification
 ![Dashboard Demo](https://github.com/InYoungee/localization-news-intelligence-agent/blob/main/images/news_agent_slack.gif)
