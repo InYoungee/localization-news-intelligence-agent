@@ -98,7 +98,7 @@ flowchart TD
    ```bash
    python news_weekly_run.py
    ```
-4. 4. Schedule it weekly via `launchd` (macOS's native scheduler — more reliable than `cron` on
+4. Schedule it weekly via `launchd` (macOS's native scheduler — more reliable than `cron` on
    recent macOS versions, see Engineering Notes below for why):
 
    Create `~/Library/LaunchAgents/com.yourname.newsagent.weekly.plist`:
@@ -148,17 +148,7 @@ flowchart TD
    permission can silently reset after a macOS update, worth re-checking if a scheduled run
    goes missing.
 
-
-  
-7. Schedule it weekly via cron:
-   ```bash
-   crontab -e
-   # 0 9 * * 1 cd /path/to/project && /path/to/project/.venv/bin/python news_weekly_run.py >> cron_output.log 2>&1
-   ```
-   On macOS, `cron` typically needs Full Disk Access granted in System Settings →
-   Privacy & Security before scheduled jobs will actually run.
-
-8. View the dashboard:
+5. View the dashboard:
    ```bash
    streamlit run streamlit_news_dashboard.py
    ```
@@ -189,6 +179,15 @@ flowchart TD
 - **One RSS feed returned 869 entries on a single fetch** — turned out to be a feed with no
   practical limit on history depth; fixed by filtering on each entry's actual publish date
   at ingestion time, not just trusting feed size.
+- **A scheduled job can look correctly configured while never actually firing.** `cron`
+  produced no useful log output at all when it silently failed to run (later traced to a
+  macOS Full Disk Access permission reset after a system update). Migrating to `launchd`
+  surfaced a different, subtler bug: an edited `.plist` had a stray extra digit in its
+  `Minute` value (`5245` instead of `45`) — invalid as a time, but still well-formed XML, so
+  `plutil -lint` reported the file as valid while the trigger silently never matched any
+  real time. The fix was proving the automatic trigger fires with a real, unattended
+  end-to-end test, not just validating the config file's syntax — "parses correctly" and
+  "behaves correctly" turned out to be two different claims.
 
 ## Near-Term Roadmap
 
